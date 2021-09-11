@@ -1,6 +1,6 @@
 import Event from "../../Events/entities/event.entity";
 
-export class User {
+export class Appointment {
     id: string;
 
     // eslint-disable-next-line camelcase

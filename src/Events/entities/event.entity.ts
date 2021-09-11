@@ -1,7 +1,7 @@
 /* eslint-disable camelcase */
 import Location from 'src/Locations/entities/location.entity';
 import {
-  Column, Entity, ManyToOne, PrimaryGeneratedColumn,
+  Column, Entity, JoinColumn, ManyToOne, PrimaryGeneratedColumn,
 } from 'typeorm';
 
 @Entity('event')
@@ -28,5 +28,6 @@ export default class Event {
   available_vacancies: string;
 
   @ManyToOne((type) => Location, (location) => location)
+  @JoinColumn()
   location: Location;
 }

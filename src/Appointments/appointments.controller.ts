@@ -1,35 +1,30 @@
 import {
   Controller, Get, Post, Body, Patch, Param, Delete,
 } from '@nestjs/common';
-import { User } from './dto/appointments.dto';
-import { UserService } from './appointments.service';
+import { Appointment } from './dto/appointments.dto';
+import { AppoitmentService } from './appointments.service';
 
-@Controller('user')
-export class UserController {
-  constructor(private readonly userService: UserService) {}
+@Controller('appointment')
+export class AppointmentController {
+  constructor(private readonly appointmentService: AppoitmentService) {}
 
   @Post()
-  create(@Body() user: User) {
-    return this.userService.create(user);
+  create(@Body() user: Appointment) {
+    return this.appointmentService.create(user);
   }
 
   @Get()
   findAll() {
-    return this.userService.findAll();
+    return this.appointmentService.findAll();
   }
 
   @Get(':id')
   findOne(@Param('id') id: string) {
-    return this.userService.findOne(+id);
-  }
-
-  @Patch(':id')
-  update(@Param('id') id: string, @Body() user: User) {
-    return this.userService.update(+id, user);
+    return this.appointmentService.findOne(+id);
   }
 
   @Delete(':id')
   remove(@Param('id') id: string) {
-    return this.userService.remove(+id);
+    return this.appointmentService.remove(+id);
   }
 }

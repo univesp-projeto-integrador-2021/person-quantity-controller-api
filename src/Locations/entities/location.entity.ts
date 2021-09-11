@@ -1,4 +1,8 @@
-import { Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
+import {
+  Column, Entity, OneToMany, PrimaryGeneratedColumn,
+} from 'typeorm';
+
+import Event from '../../Events/entities/event.entity';
 
 @Entity('location')
 export default class Location {
@@ -7,9 +11,6 @@ export default class Location {
 
   @Column()
   name: string;
-
-  @Column()
-  email: string;
 
   @Column()
   street: string;
