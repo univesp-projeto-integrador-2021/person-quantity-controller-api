@@ -6,11 +6,14 @@ import { AppoitmentService } from './appointments.service';
 
 @Controller('appointment')
 export class AppointmentController {
-  constructor(private readonly appointmentService: AppoitmentService) {}
+  constructor(private readonly appointmentService: AppoitmentService) {
+  }
 
   @Post()
-  create(@Body() user: Appointment) {
-    return this.appointmentService.create(user);
+  create(@Body() appointment: Appointment) {
+    const appointmentToCreate = { ...appointment, event: [appointment.event] };
+
+    return this.appointmentService.create(appointmentToCreate);
   }
 
   @Get()

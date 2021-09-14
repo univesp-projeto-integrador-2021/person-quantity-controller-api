@@ -1,5 +1,5 @@
 import {
-  Column, Entity, JoinColumn, OneToOne, PrimaryGeneratedColumn,
+  Column, Entity, JoinTable, ManyToMany, PrimaryGeneratedColumn,
 } from 'typeorm';
 import Event from '../../Events/entities/event.entity';
 
@@ -10,9 +10,9 @@ export default class Appointment {
 
   @Column()
     // eslint-disable-next-line camelcase
-    person_name: string;
+  person_name: string;
 
-  @OneToOne(() => Event)
-  @JoinColumn()
-  event: Event;
+  @ManyToMany(() => Event)
+  @JoinTable()
+  event: Event[];
 }

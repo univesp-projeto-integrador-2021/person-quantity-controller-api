@@ -1,8 +1,10 @@
 /* eslint-disable camelcase */
 import Location from 'src/Locations/entities/location.entity';
 import {
-  Column, Entity, JoinColumn, ManyToOne, PrimaryGeneratedColumn,
+  Column, Entity, JoinColumn, ManyToMany, ManyToOne, OneToMany, PrimaryGeneratedColumn,
 } from 'typeorm';
+import { Appointment } from '../../Appointments/dto/appointments.dto';
+import { JoinTable } from 'typeorm/browser';
 
 @Entity('event')
 export default class Event {
@@ -30,4 +32,8 @@ export default class Event {
   @ManyToOne((type) => Location, (location) => location)
   @JoinColumn()
   location: Location;
+
+  // @ManyToMany(() => Appointment, (appointments) => appointments.event)
+  // @JoinTable()
+  // appointments: Appointment[];
 }
