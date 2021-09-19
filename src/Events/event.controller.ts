@@ -5,6 +5,7 @@ import {
   Body,
   Param,
   Delete,
+  Query,
 } from '@nestjs/common';
 import { EventDTO } from './dto/event.dto';
 import { EventService } from './event.service';
@@ -19,8 +20,8 @@ export class EventController {
   }
 
   @Get()
-  findAll() {
-    return this.eventService.findAll();
+  findAll(@Query() ...filter) {
+    return this.eventService.findAll(...filter);
   }
 
   @Get(':id')
