@@ -7,4 +7,8 @@ export class Appointment {
     person_name: string;
 
     event: Event;
+
+    nickname: string;
+
+    email: string;
 }

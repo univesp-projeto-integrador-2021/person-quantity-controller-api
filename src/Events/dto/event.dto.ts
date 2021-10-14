@@ -15,4 +15,8 @@ export class EventDTO {
     available_vacancies: string;
 
     location_id: string;
+
+    description: string
+
+    image: string
 }

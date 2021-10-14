@@ -37,7 +37,7 @@ export class EventService {
     const possibleFilters = ['name', 'location'];
     let filterIncludes;
     if (name || location) {
-      // eslint-disable-next-line array-callback-return
+      // eslint-disable-next-line array-callback-return,consistent-return
       filterIncludes = filter.map((arg) => {
         if (possibleFilters.includes(Object.keys(arg)[0])) {
           return name ? { name: Like(`%${name}%`) } : { location };

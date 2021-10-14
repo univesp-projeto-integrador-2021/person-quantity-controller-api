@@ -11,25 +11,34 @@ export class AppoitmentService {
     @InjectRepository(Appointment)
     private appointmentRepository: Repository<Appointment>,
     @InjectRepository(Event) private eventRepository: Repository<Event>,
-  ) {
-  }
+  ) {}
 
   async create(appointment: Appointment) {
-    const appointmentExists = await this.appointmentRepository.find({ where: { person_name: appointment.person_name } });
+    const appointmentExists = await this.appointmentRepository.find({
+      where: { person_name: appointment.person_name },
+    });
 
     if (appointmentExists.length) {
-      throw new HttpException('Você já está cadastrado nesse evento ;D', HttpStatus.BAD_REQUEST);
+      throw new HttpException(
+        'Você já está cadastrado nesse evento ;D',
+        HttpStatus.BAD_REQUEST,
+      );
     }
 
-    const eventExists = await this.eventRepository.findOne(appointment.event[0].id);
+    const eventExists = await this.eventRepository.findOne(
+      appointment.event[0].id,
+    );
     const { id, available_vacancies } = eventExists;
 
     if (+available_vacancies < 1) {
-      throw new HttpException('O número de vagas para este evento está esgotado :(', HttpStatus.BAD_REQUEST);
+      throw new HttpException(
+        'O número de vagas para este evento está esgotado :(',
+        HttpStatus.BAD_REQUEST,
+      );
     }
-    const appointmentCreated = await this.appointmentRepository.save(
-      { ...appointment },
-    );
+    const appointmentCreated = await this.appointmentRepository.save({
+      ...appointment,
+    });
 
     const currentVacancies = +available_vacancies - 1;
 
@@ -37,6 +46,8 @@ export class AppoitmentService {
       ...eventExists,
       available_vacancies: `${currentVacancies}`,
     });
+
+    return appointmentCreated;
   }
 
   async findAll() {
