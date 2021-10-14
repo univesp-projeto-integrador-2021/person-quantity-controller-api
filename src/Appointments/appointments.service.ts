@@ -32,7 +32,7 @@ export class AppoitmentService {
 
     if (+available_vacancies < 1) {
       throw new HttpException(
-        'O número de vagas para este evento está esgotado :(',
+        'O número de vagas para este evento está esgotado ):',
         HttpStatus.BAD_REQUEST,
       );
     }
